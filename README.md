@@ -12,6 +12,21 @@ without having to store the images on their servers.
 
 The markdown content is saved to clipboard and then processed with this script.
 
+<!-- TOC -->
+* [Tango process markdown](#tango-process-markdown)
+  * [Installation](#installation)
+  * [Getting started](#getting-started)
+    * [1. Get the Tango Chrome Extension](#1-get-the-tango-chrome-extension)
+    * [2. Create a Tango account](#2-create-a-tango-account)
+    * [3. Start recording your step-by-step workflow](#3-start-recording-your-step-by-step-workflow)
+    * [4. View the results and start editing](#4-view-the-results-and-start-editing)
+    * [5. Copy the markdown to your clipboard](#5-copy-the-markdown-to-your-clipboard)
+    * [6. Run the script](#6-run-the-script)
+    * [7. View the PROCESSED RESULT and compare it to the UNPROCESSED RESULT](#7-view-the-processed-result-and-compare-it-to-the-unprocessed-result)
+  * [Help](#help)
+  * [TODO:](#todo-)
+<!-- TOC -->
+
 ## Installation
 
 Create and activate a virtual environment and install the required packages with:
@@ -19,7 +34,9 @@ Create and activate a virtual environment and install the required packages with
 ```shell
 poetry install --no-root
 ```
+
 OR
+
 ```shell
 pip install .
 ```
@@ -62,10 +79,17 @@ python3 src/tango_process_markdown/process_markdown.py tutorial_processed.md --h
 
 ### 7. View the [PROCESSED RESULT](./tutorial_processed.md) and compare it to the [UNPROCESSED RESULT](./tutorial_unprocessed.md)
 
-
 ## Help
 
-If you have troubles, run: 
+If you have troubles, run:
+
 ```shell
 python3 src/tango_process_markdown/process_markdown.py --help
 ```
+
+## TODO:
+
+- [ ] Make async calls instead of sync
+- [ ] Add unit tests
+- [ ] Create GitHub Page
+- [ ] Setup CI

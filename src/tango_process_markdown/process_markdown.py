@@ -168,4 +168,4 @@ def main(
 
 
 if __name__ == "__main__":
-    main("out.md")
+    typer.run(main)

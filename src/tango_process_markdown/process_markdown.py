@@ -30,21 +30,18 @@ def remove_outer_content(text: str) -> str:
         return text
 
 
-def remove_watermark(text: str, mark: str = "mark") -> str:
+def remove_watermark(text: str) -> str:
     """
-    Delete everything that starts with "mark" and ends with "&",
-    without deleting the last character
+    Removes the watermark from the markdown content.
 
     Args:
         text: markdown content
-        mark: staring character to look for
 
     Returns: processed markdown content
 
     """
-    #
-    marked_text_regex: str = rf"{mark}(.*?)&."
-    return re.sub(marked_text_regex, "", text)
+    marked_text_regex: str = r"&blend.*?\)"
+    return re.sub(marked_text_regex, ")", text)
 
 
 def download_image(url: str) -> bytes:
@@ -171,4 +168,4 @@ def main(
 
 
 if __name__ == "__main__":
-    typer.run(main)
+    main("out.md")

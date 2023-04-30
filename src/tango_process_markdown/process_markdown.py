@@ -1,7 +1,7 @@
 import re
 from pathlib import Path
 from re import Match
-from typing import List
+from typing import List, Optional
 
 import httpx
 import pyperclip
@@ -121,20 +121,35 @@ def replace_urls(text: str, old_urls: List[str], new_urls: List[str]) -> str:
 
 
 def main(
-    markdown_file: str, image_dir: str = "images", header: str = "Step-by-Step Guide"
+    markdown_file: Optional[str] = None,
+    image_dir: str = "images",
+    header: str = "Step-by-Step Guide",
+    output: str = "out.md",
+    clipboard: bool = False,
 ):
     """
 
     Args:
-        markdown_file: markdown filename to create
+        markdown_file: markdown filename to process
         image_dir: directory in which the images should be stored
         header: the header of the markdown file to be created
+        output: the output filename
+        clipboard: if True, the clipboard content is used instead of the markdown file
 
     Returns: None
 
     """
-    clipboard_content: str = pyperclip.paste()
-    processed_content: str = remove_outer_content(text=clipboard_content)
+
+    if not clipboard and not markdown_file:
+        raise ValueError("Either markdown_file or clipboard must be set.")
+
+    if clipboard:
+        content: str = pyperclip.paste()
+    else:
+        with open(markdown_file, "r") as f:
+            content: str = f.read()
+
+    processed_content: str = remove_outer_content(text=content)
     processed_content: str = remove_watermark(text=processed_content)
 
     urls_old: List[str] = extract_urls(processed_content)
@@ -162,8 +177,10 @@ def main(
     # add header
     processed_content: str = f"# {header}{processed_content}"
 
+    # TODO: apply markdown linter to the processed content
+
     # create markdown file
-    with open(markdown_file, "w") as f:
+    with open(output, "w") as f:
         f.write(processed_content)
 
 

@@ -2,6 +2,7 @@ import re
 from pathlib import Path
 from re import Match
 from typing import List, Optional
+from urllib.parse import parse_qs, urlencode, urlparse, urlunparse
 
 import httpx
 import pyperclip
@@ -30,18 +31,39 @@ def remove_outer_content(text: str) -> str:
         return text
 
 
-def remove_watermark(text: str) -> str:
+def remove_blend_params(url: str) -> str:
     """
-    Removes the watermark from the markdown content.
+    Removes query parameters that start with 'blend' from a given URL.
+    This removes the watermark.
 
     Args:
-        text: markdown content
+        url (str): The URL from which 'blend' parameters should be removed.
 
-    Returns: processed markdown content
-
+    Returns:
+        str: The URL without query parameters that start with 'blend'.
     """
-    marked_text_regex: str = r"&blend.*?\)"
-    return re.sub(marked_text_regex, ")", text)
+    parsed_url = urlparse(url)
+    query_params = parse_qs(parsed_url.query)
+
+    # Filter out parameters that start with "blend"
+    filtered_params = {
+        k: v for k, v in query_params.items() if not k.startswith("blend")
+    }
+
+    # Reconstruct the query string
+    new_query_string = urlencode(filtered_params, doseq=True)
+
+    # Reconstruct the full URL without blend parameters
+    return urlunparse(
+        (
+            parsed_url.scheme,
+            parsed_url.netloc,
+            parsed_url.path,
+            parsed_url.params,
+            new_query_string,
+            parsed_url.fragment,
+        )
+    )
 
 
 def download_image(url: str) -> bytes:
@@ -150,13 +172,15 @@ def main(
             content: str = f.read()
 
     processed_content: str = remove_outer_content(text=content)
-    processed_content: str = remove_watermark(text=processed_content)
-
     urls_old: List[str] = extract_urls(processed_content)
+    urls_without_watermark: List[str] = [
+        remove_blend_params(url_old) for url_old in urls_old
+    ]
+
     urls_new: List[str] = list()
 
     # download & store images
-    for idx, url in enumerate(urls_old):
+    for idx, url in enumerate(urls_without_watermark):
         image: bytes = download_image(url)
         assert image
 

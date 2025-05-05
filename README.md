@@ -8,37 +8,23 @@ locally.
 ## Table of contents
 
 <!-- TOC -->
+
 * [Tango process markdown](#tango-process-markdown)
-  * [Table of contents](#table-of-contents)
-  * [Minimal example](#minimal-example)
-  * [Installation](#installation)
-  * [Getting started](#getting-started)
-    * [1. Get the Tango Chrome Extension](#1-get-the-tango-chrome-extension)
-    * [2. Create a Tango account](#2-create-a-tango-account)
-    * [3. Start recording your step-by-step workflow](#3-start-recording-your-step-by-step-workflow)
-    * [4. View the results and start editing](#4-view-the-results-and-start-editing)
-    * [5. Copy the markdown to your clipboard](#5-copy-the-markdown-to-your-clipboard)
-    * [6. Run the script](#6-run-the-script)
-    * [7. View the OUTPUT and compare it to the UNPROCESSED RESULT](#7-view-the-output-and-compare-it-to-the-unprocessed-result)
-  * [Help](#help)
-  * [TODO:](#todo-)
+    * [Table of contents](#table-of-contents)
+    * [Minimal example](#minimal-example)
+    * [Installation](#installation)
+    * [Getting started](#getting-started)
+        * [1. Get the Tango Chrome Extension](#1-get-the-tango-chrome-extension)
+        * [2. Create a Tango account](#2-create-a-tango-account)
+        * [3. Start recording your step-by-step workflow](#3-start-recording-your-step-by-step-workflow)
+        * [4. View the results and start editing](#4-view-the-results-and-start-editing)
+        * [5. Copy the markdown to your clipboard](#5-copy-the-markdown-to-your-clipboard)
+        * [6. Run the script](#6-run-the-script)
+        * [7. View the OUTPUT and compare it to the UNPROCESSED RESULT](#7-view-the-output-and-compare-it-to-the-unprocessed-result)
+    * [Help](#help)
+    * [TODO:](#todo)
+
 <!-- TOC -->
-
-## Minimal example
-
-You can save the markdown text to a file and specify the file path when running the script.
-For example:
-
-```bash
-python3 src/tango_process_markdown/process_markdown.py --markdown-file example_unprocessed.md
-```
-
-Or you can copy the markdown text to your clipboard and run the script with the `--clipboard` flag.
-For example:
-
-```bash
-python3 my_script.py --clipboard
-```
 
 ## Installation
 
@@ -54,10 +40,20 @@ OR
 uv pip install .
 ```
 
-You can also install with development dependencies:
+## Minimal example
 
-```shell
-uv pip install -e ".[lint]"
+You can save the Markdown text to a file and specify the file path when running the script.
+For example:
+
+```bash
+python3 src/tango_process_markdown/process_markdown.py --markdown-file example_unprocessed.md
+```
+
+Or you can copy the Markdown text to your clipboard and run the script with the `--clipboard` flag.
+For example:
+
+```bash
+python3 [./src/tango_process_markdown/process_markdown.py](src/tango_process_markdown/process_markdown.py) --clipboard
 ```
 
 ## Getting started
@@ -116,9 +112,3 @@ If you have troubles, run:
 ```shell
 python3 src/tango_process_markdown/process_markdown.py --help
 ```
-
-## TODO:
-
-- [ ] Make async calls instead of sync
-- [ ] Add unit tests
-- [ ] Create GitHub Page

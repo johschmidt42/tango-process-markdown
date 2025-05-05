@@ -3,12 +3,12 @@ name = "tango_process_markdown"
 version = "0.1.0"
 description = ""
 authors = [
-    {name = "Johannes Schmidt", email = "johannes.schmidt.oxa@gmail.com"}
+    { name = "Johannes Schmidt", email = "johannes.schmidt.oxa@gmail.com" }
 ]
 readme = "README.md"
 requires-python = ">=3.10"
-license = {text = "MIT"}
-urls = {homepage = "https://github.com/johschmidt42/tango-process-markdown", repository = "https://github.com/johschmidt42/tango-process-markdown"}
+license = { text = "MIT" }
+urls = { homepage = "https://github.com/johschmidt42/tango-process-markdown", repository = "https://github.com/johschmidt42/tango-process-markdown" }
 
 dependencies = [
     "typer>=0.7.0",
@@ -16,15 +16,31 @@ dependencies = [
     "pyperclip>=1.8.2",
 ]
 
-[project.optional-dependencies]
-lint = [
-    "black>=22.12.0",
-    "isort>=5.11.4",
-    "flake8>=6.0.0",
+[dependency-groups]
+dev = [
+    "pytest>=8.3.5",
+    "pytest-cov>=6.1.1",
+    "ruff>=0.11.6",
+    "sqlfluff>=3.4.0",
 ]
 
-[tool.isort]
-profile = "black"
+[tool.ruff]
+# Same as Black.
+line-length = 88
+# Assume Python 3.10
+target-version = "py310"
+# Automatically fix imports
+fix = true
+
+[tool.ruff.lint]
+# Enable flake8-bugbear (`B`) rules.
+select = ["E", "F", "B", "I", "W", "C90"]
+
+[tool.ruff.format]
+# Enable auto-formatting (equivalent to Black)
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"
 
 [build-system]
 requires = ["hatchling"]

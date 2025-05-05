@@ -136,7 +136,7 @@ def replace_urls(text: str, old_urls: List[str], new_urls: List[str]) -> str:
 
     """
     assert len(old_urls) == len(new_urls)
-    for old_url, new_url in zip(old_urls, new_urls):
+    for old_url, new_url in zip(old_urls, new_urls, strict=False):
         text: str = text.replace(old_url, new_url)
 
     return text

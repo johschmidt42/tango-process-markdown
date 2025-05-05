@@ -24,24 +24,6 @@ dev = [
     "sqlfluff>=3.4.0",
 ]
 
-[tool.ruff]
-# Same as Black.
-line-length = 88
-# Assume Python 3.10
-target-version = "py310"
-# Automatically fix imports
-fix = true
-
-[tool.ruff.lint]
-# Enable flake8-bugbear (`B`) rules.
-select = ["E", "F", "B", "I", "W", "C90"]
-
-[tool.ruff.format]
-# Enable auto-formatting (equivalent to Black)
-quote-style = "double"
-indent-style = "space"
-line-ending = "auto"
-
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"

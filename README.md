@@ -45,13 +45,19 @@ python3 my_script.py --clipboard
 Create and activate a virtual environment and install the required packages with:
 
 ```shell
-poetry install --no-root
+uv pip install -e .
 ```
 
 OR
 
 ```shell
-pip install .
+uv pip install .
+```
+
+You can also install with development dependencies:
+
+```shell
+uv pip install -e ".[lint]"
 ```
 
 ## Getting started
@@ -116,4 +122,3 @@ python3 src/tango_process_markdown/process_markdown.py --help
 - [ ] Make async calls instead of sync
 - [ ] Add unit tests
 - [ ] Create GitHub Page
-- [ ] Setup CI
